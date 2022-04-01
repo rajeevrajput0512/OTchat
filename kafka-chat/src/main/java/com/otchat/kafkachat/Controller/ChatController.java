@@ -22,18 +22,15 @@ public class ChatController {
     public void sendMessage(@RequestBody Message message) {
         message.setTimestamp(LocalDateTime.now().toString());
         try {
-            //Sending the message to kafka topic queue
             kafkaTemplate.send("kafka-chat-3", message).get();
         } catch (InterruptedException | ExecutionException e) {
             throw new RuntimeException(e);
         }
     }
 
-    //    -------------- WebSocket API ----------------
     @MessageMapping("/sendMessage")
     @SendTo("/topic/group")
     public Message broadcastGroupMessage(@Payload Message message) {
-        //Sending this message to all the subscribers
         return message;
     }
 
@@ -41,7 +38,6 @@ public class ChatController {
     @SendTo("/topic/group")
     public Message addUser(@Payload Message message,
                            SimpMessageHeaderAccessor headerAccessor) {
-        // Add user in web socket session
         headerAccessor.getSessionAttributes().put("username", message.getSender());
         return message;
     }
