@@ -5,23 +5,7 @@ public class Message {
     private String content;
     private String timestamp;
 
-    public Message(){
-
-    }
-    public String getSender() {
-        return sender;
-    }
-
-    public void setSender(String sender) {
-        this.sender = sender;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
+    public Message() {
     }
 
     public String getTimestamp() {
@@ -32,10 +16,27 @@ public class Message {
         this.timestamp = timestamp;
     }
 
+    public String getSender() {
+        return sender;
+    }
+
+    public void setSender(String sender) {
+        this.sender = sender;
+    }
+
     public Message(String sender, String content) {
         this.sender = sender;
         this.content = content;
     }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     @Override
     public String toString() {
         return "Message{" +

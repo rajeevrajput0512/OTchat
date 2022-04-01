@@ -17,23 +17,22 @@ import java.util.Map;
 @EnableKafka
 @Configuration
 public class ProducerConfiguration {
-
     @Bean
-    public Map<String , Object> producerConfiguration(){
-        Map<String , Object> configure = new HashMap<>();
-        configure.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,"localhost:9092");
-        configure.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-        configure.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
-        return configure;
-
-    }
-    @Bean
-    public ProducerFactory<String , Message> producerFactory(){
-        return new DefaultKafkaProducerFactory<>(producerConfiguration());
+    public ProducerFactory<String, Message> producerFactory() {
+        return new DefaultKafkaProducerFactory<>(producerConfigurations());
     }
 
     @Bean
-    public KafkaTemplate<String,Message> kafkaTemplate(){
+    public Map<String, Object> producerConfigurations() {
+        Map<String, Object> configurations = new HashMap<>();
+        configurations.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        configurations.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        configurations.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
+        return configurations;
+    }
+
+    @Bean
+    public KafkaTemplate<String, Message> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
 }
