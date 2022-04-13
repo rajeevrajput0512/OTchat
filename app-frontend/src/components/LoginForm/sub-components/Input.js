@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import "./Login.css";
+import "./Input.css";
 
-export default function Login() {
+const Input =  ({onSubmit}) => {
   const [phone, setPhone] = useState("");
-  const [password, setPassword] = useState("");
 
-  function handleSubmit(event) {
-    event.preventDefault();
-  }
+  let handleSubmit = (e) => {
+    e.preventDefault();
+    onSubmit(phone);
+  };
 
   return (
     <div className="Login">
@@ -23,16 +23,11 @@ export default function Login() {
             pattern="[0-9]{10}"
             title="Enter a valid phone number"
             onChange={(e) => setPhone(e.target.value)}
-          />
-        </Form.Group>
-        <Form.Group size="lg" controlId="password">
-          <Form.Label>Password </Form.Label>
-          <Form.Control
-            type="password"
-            value={password}
-            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-            title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
-            onChange={(e) => setPassword(e.target.value)}
+            onKeyPress={(e) => {
+              if (e.key === "Enter") {
+                handleSubmit();
+              }
+            }}
           />
         </Form.Group>
         <Button style={{ marginTop: "10px" }} block size="lg" type="submit">
@@ -42,3 +37,5 @@ export default function Login() {
     </div>
   );
 }
+
+export default Input;

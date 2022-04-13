@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Navbar, Container } from "react-bootstrap";
 import "./Header.css";
 function Header(props = {}) {
@@ -9,9 +9,6 @@ function Header(props = {}) {
           OTchat
         </Navbar.Text>
         <Navbar.Toggle />
-        <Navbar.Collapse className="justify-content-end">
-          <Navbar.Text>Signed in as: {props.name}</Navbar.Text>
-        </Navbar.Collapse>
       </Container>
     </Navbar>
   );
