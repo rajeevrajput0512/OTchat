@@ -6,9 +6,9 @@ const api = Axios.create({
 
 const chatapi = {
     getMessages: (groupId) => api.get(`messages/${groupId}`),
-    sendMessage: (phone, text) => {
+    sendMessage: (username, text) => {
         let msg = {
-            sender : phone,
+            sender : username,
             content: text
         }
         return api.post('send', msg);
